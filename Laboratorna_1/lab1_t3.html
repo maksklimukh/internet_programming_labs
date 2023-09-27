@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script>
+        function onClickEvent() {
+            var textField = document.getElementById("text_field");
+            textField.value = "Клік на текстовому полі!";
+        }
+
+        function onMouseOverEvent() {
+            var textField = document.getElementById("text_field");
+            textField.value = "Курсор миші на текстовому полі!";
+        }
+    </script>
+    <title>Лабораторна 1 Завдання 3</title>
+</head>
+<body>
+    <h1>Події onClick і onMouseOver</h1>
+    <form>
+        <input type="text" size="50" id="text_field" value="Події будуть виводитися тут">
+        <br>
+        <input type="button" value="Клікніть мене" onclick="onClickEvent()">
+        <input type="text" size="50" placeholder="Наведіть курсор миші" onmouseover="onMouseOverEvent()">
+    </form>
+</body>
+</html>

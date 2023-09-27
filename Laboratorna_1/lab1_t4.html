@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function calculate() {
+            let x = parseFloat(main_form.t_x.value);
+            let y = parseFloat(main_form.t_y.value);
+            let result;
+
+            if ((x < 10 || y !== 3) && x !== 2) {
+                result = 2 * x ** 2 - 3 * y ** 2;
+            } else {
+                result = x ** 3 + 3 * x * y;
+            }
+
+            main_form.t_result.value = result;
+        }
+    </script>
+    <title>Лабораторна 1 Завдання 4</title>
+</head>
+<body>
+    <form id="main_form">
+        x<input type="text" id="t_x" value="10"><br>
+        y<input type="text" id="t_y" value="3"><br>
+        Результат<input type="text" id="t_result" value=""><br>
+        <input type="button" onClick="calculate();" value="Розрахувати">
+    </form>
+</body>
+</html>

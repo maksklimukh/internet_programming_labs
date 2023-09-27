@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // Масиви з даними про континенти
+        var continents = ["Африка", "Америка", "Азія", "Європа", "Океанія"];
+        var populationDensity = [38, 22, 150, 73, 5]; // Густина населення на км²
+        var area = [30.37, 42.55, 44.58, 10.18, 8.53]; // Площа в тисячах км²
+
+        // Функція для виведення густини населення та площі континенту
+        function fun1() {
+            var continentInput = document.getElementById("continent").value;
+            var resultDensity = document.getElementById("resultDensity");
+            var resultArea = document.getElementById("resultArea");
+
+            var index = continents.indexOf(continentInput);
+
+            if (index !== -1) {
+                resultDensity.innerHTML = "Густина населення: " + populationDensity[index] + " осіб/км²";
+                resultArea.innerHTML = "Площа: " + area[index] + " тис. км²";
+            } else {
+                resultDensity.innerHTML = "Континент не знайдено.";
+                resultArea.innerHTML = "";
+            }
+        }
+
+        // Функція для виведення добутку густини населення на площу континенту
+        function fun2() {
+            var continentInput = document.getElementById("continent").value;
+            var resultPopulation = document.getElementById("resultPopulation");
+
+            var index = continents.indexOf(continentInput);
+
+            if (index !== -1) {
+                var population = populationDensity[index] * area[index];
+                resultPopulation.innerHTML = "Населення: " + population + " осіб";
+            } else {
+                resultPopulation.innerHTML = "Континент не знайдено.";
+            }
+        }
+    </script>
+    <title>Лабораторна 1 Завдання 6</title>
+</head>
+<body>
+    <h2>Інформація про континенти</h2>
+    <label for="continent">Введіть назву континенту (Африка, Америка, Азія, Європа, Океанія): </label>
+    <input type="text" id="continent"><br><br>
+
+    <button onclick="fun1()">Густина і площа</button>
+    <button onclick="fun2()">Населення</button><br><br>
+
+    <div id="resultDensity"></div>
+    <div id="resultArea"></div>
+    <div id="resultPopulation"></div>
+</body>
+</html>

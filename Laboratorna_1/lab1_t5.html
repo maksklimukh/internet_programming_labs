@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+    function calculateSum() {
+        let x = parseFloat(document.getElementById("input_x").value);
+        let y = parseFloat(document.getElementById("input_y").value);
+        let resultElement = document.getElementById("result");
+
+        let sum = 0.0;
+        let to4nost = 0.001;
+        let cur = 0.0;
+
+        for (let i = 6; i <= 12; i++) {
+            let factorial = 1;
+            for (let j = 1; j <= i; j++) {
+                factorial *= j;
+            }
+            cur = Math.pow(-1, i) * ((-2 * x + Math.pow(y, 2)) / factorial);
+            sum += cur;
+        }
+
+        resultElement.innerHTML = "Результат: " + sum.toFixed(4);
+    }
+    </script>
+    <title>Лабораторна 1 Завдання 5</title>
+</head>
+<body>
+    <form>
+        <label for="input_x">Введіть значення x: </label>
+        <input type="text" id="input_x" value="10"><br>
+
+        <label for="input_y">Введіть значення y: </label>
+        <input type="text" id="input_y" value="-2"><br>
+
+        <input type="button" onClick="calculateSum();" value="Розрахувати"><br>
+
+        <p id="result"></p>
+    </form>
+</body>
+</html>

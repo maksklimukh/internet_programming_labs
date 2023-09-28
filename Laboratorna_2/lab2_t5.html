@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Використання методів console</title>
+    <script>
+        function logInfo() {
+        console.info("Це інформаційне повідомлення.");
+        }
+
+        function logWarning() {
+        console.warn("Це попередження.");
+        }
+
+        function logError() {
+        console.error("Це повідомлення про помилку.");
+        }
+
+        function logObject() {
+        const obj = { name: "John", age: 30 };
+        console.dir(obj);
+        }
+
+        function logXML() {
+        const xmlString = "<note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me this weekend!</body></note>";
+        console.dirxml(xmlString);
+        }
+
+        function measureTime() {
+        console.time("Час виконання");
+        console.timeEnd("Час виконання");
+        }
+
+        function startProfile() {
+        console.profile("Профіль");
+        }
+
+        function stopProfile() {
+        console.profileEnd("Профіль");
+        }
+
+        function assertValue() {
+        const value = 5;
+        console.assert(value === 10, "Значення не дорівнює 10");
+        }
+    </script>
+</head>
+<body>
+    <h2>Використання методів console</h2>
+
+    <button onclick="logInfo()">console.info()</button>
+    <button onclick="logWarning()">console.warn()</button>
+    <button onclick="logError()">console.error()</button>
+    <button onclick="logObject()">console.dir()</button>
+    <button onclick="logXML()">console.dirxml()</button>
+    <button onclick="measureTime()">console.time() / console.timeEnd()</button>
+    <button onclick="startProfile()">console.profile()</button>
+    <button onclick="stopProfile()">console.profileEnd()</button>
+    <button onclick="assertValue()">console.assert()</button>
+
+</body>
+</html>

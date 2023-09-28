@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб-сторінка з використанням console.log()</title>
+    <script>
+        function calculateRemainder() {
+        const dividend = parseInt(document.getElementById("dividend").value);
+        const divisor = parseInt(document.getElementById("divisor").value);
+        const remainder = dividend % divisor;
+
+        console.log("Остача від ділення", dividend, "на", divisor, "дорівнює", remainder);
+
+        const resultElement = document.getElementById("result");
+        resultElement.textContent = "Остача від ділення " + dividend + " на " + divisor + " дорівнює " + remainder;
+        }
+
+        function checkRemainderZero() {
+        const number = parseInt(document.getElementById("number").value);
+        const divisor = parseInt(document.getElementById("divisor2").value);
+        const isRemainderZero = (number % divisor) === 0;
+
+        console.log("Остача від ділення", number, "на", divisor, "дорівнює нулю:", isRemainderZero);
+
+        const resultElement = document.getElementById("result2");
+        resultElement.textContent = "Остача від ділення " + number + " на " + divisor + " дорівнює нулю: " + isRemainderZero;
+        }
+
+        function displayArray() {
+        const array = [1, 2, 3, 4, 5];
+        let output = "Елементи масиву:\n";
+
+        for (let i = 0; i < array.length; i++) {
+            output += "Елемент " + (i + 1) + ": " + array[i] + "\n";
+        }
+
+        console.log(output);
+        }
+    </script>
+</head>
+<body>
+    <h2>Веб-сторінка з використанням console.log()</h2>
+
+    <h3>Вивід остачі від ділення одного числа на інше:</h3>
+    <label for="dividend">Ділене число:</label>
+    <input type="text" id="dividend">
+    <label for="divisor">Дільник:</label>
+    <input type="text" id="divisor">
+    <button onclick="calculateRemainder()">Розрахувати</button>
+    <div id="result"></div>
+
+    <h3>Вивід логічного значення перевірки рівності нулю остачі від ділення:</h3>
+    <label for="number">Число:</label>
+    <input type="text" id="number">
+    <label for="divisor2">Дільник:</label>
+    <input type="text" id="divisor2">
+    <button onclick="checkRemainderZero()">Перевірити</button>
+    <div id="result2"></div>
+
+    <h3>Комбінований вивід тексту і значень масиву:</h3>
+    <button onclick="displayArray()">Вивести масив</button>
+</body>
+</html>

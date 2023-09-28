@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор стовпців</title>
+    <script>
+        let rows, columns;
+
+        function buildMatrix() {
+        rows = parseInt(document.getElementById("t_str").value);
+        columns = parseInt(document.getElementById("t_stb").value);
+        let matrixTable = "<table>\n";
+
+        for (let i = 1; i <= rows; i++) {
+            matrixTable += "<tr>\n";
+            for (let j = 1; j <= columns; j++) {
+            const value = 3 * i - 2 * j;
+            matrixTable += "<td>";
+            matrixTable += `<input type="text" id="_${i}_${j}" value="${value}">`;
+            matrixTable += "</td>\n";
+            }
+            matrixTable += "</tr>\n";
+        }
+
+        matrixTable += "</table>";
+        document.getElementById("matrix_div").innerHTML = matrixTable;
+        }
+
+        function calculate() {
+        let rowSum = 0;
+        for (let i = 1; i <= rows; i++) {
+            rowSum += parseInt(document.getElementById(`_${i}_3`).value);
+        }
+        alert(`Сума елементів третього стовпця: ${rowSum}`);
+        }
+    </script>
+</head>
+<body>
+    <h2>Калькулятор матриці (варіант 18)</h2>
+    <form>
+        <table>
+            <tr>
+            <td>Кількість рядків</td>
+            <td><input type="text" id="t_str" value="5"></td>
+            </tr>
+            <tr>
+            <td>Кількість стовпців</td>
+            <td><input type="text" id="t_stb" value="5"></td>
+            </tr>
+            <tr>
+            <td><input type="button" onClick="buildMatrix();" value="Побудувати матрицю"></td>
+            <td><input type="button" onClick="calculate();" value="Розрахувати суму 3 стовпця"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="matrix_div"></div>
+</body>
+</html>

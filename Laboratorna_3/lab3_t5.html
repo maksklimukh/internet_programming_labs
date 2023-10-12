@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблиця множення</title>
+</head>
+<body>
+    <h1>Перевірка знання таблиці множення</h1>
+    <p id="score">Загальний рахунок: 0</p>
+    <button id="nextTask">Наступне завдання</button>
+    <p id="task">Завдання: </p>
+    <input type="text" id="answer" placeholder="Введіть відповідь">
+    <button id="check">Перевірити</button>
+    <p id="result"></p>
+
+    <script>
+        const scoreElement = document.getElementById("score");
+        const nextTaskButton = document.getElementById("nextTask");
+        const taskElement = document.getElementById("task");
+        const answerInput = document.getElementById("answer");
+        const checkButton = document.getElementById("check");
+        const resultElement = document.getElementById("result");
+
+        let score = 0;
+        let currentTask = 1;
+        let maxTasks = 10;
+        let correctAnswer = null;
+
+        function generateRandomNumber() {
+            return Math.floor(Math.random() * 10);
+        }
+
+        function generateTask() {
+            const num1 = generateRandomNumber();
+            const num2 = generateRandomNumber();
+            taskElement.textContent = `Завдання: ${num1} x ${num2}`;
+            correctAnswer = num1 * num2;
+            answerInput.value = "";
+            answerInput.focus();
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(answerInput.value, 10);
+            if (userAnswer === correctAnswer) {
+                score++;
+                scoreElement.textContent = `Загальний рахунок: ${score}`;
+                resultElement.textContent = "Правильно!";
+            } else {
+                resultElement.textContent = `Неправильно. Правильна відповідь: ${correctAnswer}`;
+            }
+
+            if (currentTask < maxTasks) {
+                currentTask++;
+                generateTask();
+            } else {
+                nextTaskButton.disabled = true;
+                resultElement.textContent = `Гра завершена. Ваш результат: ${score} / ${maxTasks}`;
+            }
+        }
+
+        nextTaskButton.addEventListener("click", generateTask);
+        checkButton.addEventListener("click", checkAnswer);
+
+        generateTask();
+    </script>
+</body>
+</html>

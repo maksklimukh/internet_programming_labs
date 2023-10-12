@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розрахунок прямокутника</title>
+</head>
+<body>
+    <h1>Розрахунок прямокутника</h1>
+
+    <label for="length">Довжина:</label>
+    <input type="text" id="length" placeholder="Введіть довжину"><br><br>
+
+    <label for="width">Ширина:</label>
+    <input type="text" id="width" placeholder="Введіть ширину"><br><br>
+
+    <button onclick="calculateRectangle()">Розрахувати</button><br><br>
+
+    <p id="result">Результат:</p>
+
+    <script>
+        function calculateRectangle() {
+            let length = parseFloat(document.getElementById("length").value);
+            let width = parseFloat(document.getElementById("width").value);
+
+            if (!isNaN(length) && !isNaN(width)) {
+                let perimeter = 2 * (length + width);
+                let area = length * width;
+                let diagonal = Math.sqrt(length * length + width * width);
+
+                let resultText = "Периметр: " + perimeter.toFixed(2) + "<br>";
+                resultText += "Площа: " + area.toFixed(2) + "<br>";
+                resultText += "Довжина діагоналі: " + diagonal.toFixed(2);
+
+                document.getElementById("result").innerHTML = resultText;
+            } else {
+                document.getElementById("result").innerHTML = "Будь ласка, введіть коректні значення для довжини та ширини.";
+            }
+        }
+    </script>
+</body>
+</html>

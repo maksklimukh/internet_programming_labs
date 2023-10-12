@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Стилі для розділів і посилань */
+        .folder {
+            cursor: pointer;
+        }
+        .folder:before {
+            content: "\25B6"; /* Додати знак + */
+            margin-right: 5px;
+        }
+        .folder.expanded:before {
+            content: "\25BC"; /* Змінити знак на - */
+        }
+        .item {
+            margin-left: 20px; /* Зміщення для під-розділів */
+            display: none; /* Початково ховати під-розділи */
+        }
+    </style>
+    <title>Ієрархія</title>
+</head>
+<body>
+    <h1>Ієрархія</h1><br>
+    <ul>
+        <li class="folder">fruits</li>
+        <ul class="item">
+            <li>apple</li>
+            <li>pineapple</li>
+            <li>apricot</li>
+            <li>pear</li>
+            <li>lemon</li>
+        </ul>
+        <li class="folder">vegetables</li>
+        <ul class="item">
+            <li>potatoes</li>
+            <li>beetroot</li>
+            <li>carrots</li>
+            <li>pear</li>
+        </ul>
+    </ul>
+
+    <script>
+        const folders = document.querySelectorAll('.folder');
+        
+        folders.forEach(folder => {
+            folder.addEventListener('click', () => {
+                const item = folder.nextElementSibling;
+                
+                if (item.style.display === 'none' || item.style.display === '') {
+                    item.style.display = 'block';
+                    folder.classList.add('expanded');
+                } else {
+                    item.style.display = 'none';
+                    folder.classList.remove('expanded');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

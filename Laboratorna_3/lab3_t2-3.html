@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Екранна клавіатура</title>
+    <style>
+        #keyboard {
+            display: grid;
+            grid-template-rows: repeat(1, 1fr);
+            grid-template-columns: 13% 13% 13% 13% 13% 13% 13% 13% 13% 13%;
+            gap: 5px;
+            width: 400px;
+            /* margin: 0 auto; */
+        }
+
+        .key {
+            font-size: 18px;
+            padding: 10px 0;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        #inputText {
+            width: 560px;
+            margin-top: 10px;
+        }
+
+        #clearButton {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #switchLayout {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #00ff00;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Екранна клавіатура</h1>
+
+    <textarea id="inputText" rows="4" cols="50" placeholder="Тут ви можете набирати текст..."></textarea>
+
+    <div id="keyboard"></div>
+
+    <button id="clearButton">Очистити поле</button>
+    <button id="switchLayout">Alt+Shift</button>
+
+    <script>
+        const lettersUA = 'абвгдеєжзиіїйклмнопрстуфхцчшщьюя,. ';
+        const lettersEN = 'abcdefghijklmnopqrstuvwxyz,. ';
+        const keyboard = document.getElementById("keyboard");
+        const inputText = document.getElementById("inputText");
+        const clearButton = document.getElementById("clearButton");
+        const switchLayoutButton = document.getElementById("switchLayout");
+
+        let isUkrainianLayout = true;
+
+        function updateLayout() {
+            keyboard.innerHTML = '';
+            const layout = isUkrainianLayout ? lettersUA : lettersEN;
+
+            layout.split('').forEach(letter => {
+                const button = document.createElement("button");
+                button.textContent = letter;
+                button.className = "key";
+                button.addEventListener("click", function () {
+                    inputText.value += letter;
+                });
+                keyboard.appendChild(button);
+            });
+        }
+
+        switchLayoutButton.addEventListener("click", function () {
+            isUkrainianLayout = !isUkrainianLayout;
+            updateLayout();
+        });
+
+        clearButton.addEventListener("click", function () {
+            inputText.value = "";
+        });
+
+        updateLayout();
+    </script>
+</body>
+</html>

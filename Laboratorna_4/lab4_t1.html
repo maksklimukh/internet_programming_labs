@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тестування</title>
+</head>
+<body>
+    <h1>Лабораторна №4</h1>
+    <form name="quizForm">
+        <p>1. Яка країна є частиною Європейського союзу?</p>
+        <input type="radio" name="q1" value="0"> Україна<br>
+        <input type="radio" name="q1" value="2"> Франція<br>
+        <input type="radio" name="q1" value="2"> Німеччина<br>
+        <input type="radio" name="q1" value="0"> Канада<br>
+
+        <p>2. Який океан розташований на сході від Японії?</p>
+        <input type="radio" name="q2" value="0"> Атлантичний океан<br>
+        <input type="radio" name="q2" value="2"> Тихий океан<br>
+        <input type="radio" name="q2" value="0"> Індійський океан<br>
+        <input type="radio" name="q2" value="0"> Північний льодовитий океан<br>
+
+        <p>3. Виберіть кольори, які є весняними: </p>
+        <input type="checkbox" name="q3" value="0"> Чорний<br>
+        <input type="checkbox" name="q3" value="2"> Зелений<br>
+        <input type="checkbox" name="q3" value="0"> Синій<br>
+        <input type="checkbox" name="q3" value="2"> Рожевий<br>
+
+        <p>4. Виберіть фрукти: </p>
+        <input type="checkbox" name="q4" value="2"> Яблуко<br>
+        <input type="checkbox" name="q4" value="2"> Банан<br>
+        <input type="checkbox" name="q4" value="0"> Картопля<br>
+        <input type="checkbox" name="q4" value="0"> Морква<br>
+
+        <p>5. Які з цих міст є столицями країн? </p>
+        <select name="q5" multiple>
+            <option value="0">Київ</option>
+            <option value="2">Париж</option>
+            <option value="2">Токіо</option>
+            <option value="2">Вашингтон</option>
+        </select>
+
+        <p>6. Які мови вважаються офіційними в ООН? </p>
+        <select name="q6" multiple>
+            <option value="2">Англійська</option>
+            <option value="0">Іспанська</option>
+            <option value="2">Французька</option>
+            <option value="0">Китайська</option>
+        </select>
+
+        <p>7. Введіть столицю Італії: <input type="text" name="q7"></p>
+
+        <input type="button" value="Підрахувати бали" onclick="calculateScore(this.form)">
+    </form>
+
+    <table>
+        <tr>
+            <th>Питання</th>
+            <th>Обрані варіанти</th>
+            <th>Бал</th>
+        </tr>
+        <tr>
+            <td>Питання 1</td>
+            <td id="selected1"></td>
+            <td id="score1"></td>
+        </tr>
+        <tr>
+            <td>Питання 2</td>
+            <td id="selected2"></td>
+            <td id="score2"></td>
+        </tr>
+        <tr>
+            <td>Питання 3</td>
+            <td id="selected3"></td>
+            <td id="score3"></td>
+        </tr>
+        <tr>
+            <td>Питання 4</td>
+            <td id="selected4"></td>
+            <td id="score4"></td>
+        </tr>
+        <tr>
+            <td>Питання 5</td>
+            <td id="selected5"></td>
+            <td id="score5"></td>
+        </tr>
+        <tr>
+            <td>Питання 6</td>
+            <td id="selected6"></td>
+            <td id="score6"></td>
+        </tr>
+        <tr>
+            <td>Питання 7</td>
+            <td id="selected7"></td>
+            <td id="score7"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Загальний бал</td>
+            <td id="totalScore"></td>
+        </tr>
+    </table>
+
+    <script>
+        function calculateScore(form) {
+            let totalScore = 0;
+
+            let selected1 = document.querySelector('input[name="q1"]:checked');
+            let score1 = selected1 ? parseFloat(selected1.value) : 0;
+
+            let selected2 = document.querySelector('input[name="q2"]:checked');
+            let score2 = selected2 ? parseFloat(selected2.value) : 0;
+
+            let selected3 = document.querySelectorAll('input[name="q3"]:checked');
+            let score3 = 0;
+            for (let i = 0; i < selected3.length; i++) {
+                score3 += parseFloat(selected3[i].value);
+            }
+
+            let selected4 = document.querySelectorAll('input[name="q4"]:checked');
+            let score4 = 0;
+            for (let i = 0; i < selected4.length; i++) {
+                score4 += parseFloat(selected4[i].value);
+            }
+
+            let selected5 = form.q5.selectedOptions;
+            let score5 = 0;
+            for (let i = 0; i < selected5.length; i++) {
+                score5 += parseFloat(selected5[i].value);
+            }
+
+            let selected6 = form.q6.selectedOptions;
+            let score6 = 0;
+            for (let i = 0; i < selected6.length; i++) {
+                score6 += parseFloat(selected6[i].value);
+            }
+
+            let answer7 = form.q7.value;
+            let score7 = answer7.toLowerCase() === "рим" ? 1 : 0;
+
+            totalScore = score1 + score2 + score3 + score4 + score5 + score6 + score7;
+
+            document.getElementById("selected1").textContent = selected1 ? selected1.nextSibling.textContent : "Не обрано";
+            document.getElementById("score1").textContent = score1;
+
+            document.getElementById("selected2").textContent = selected2 ? selected2.nextSibling.textContent : "Не обрано";
+            document.getElementById("score2").textContent = score2;
+
+            document.getElementById("selected3").textContent = score3 > 0 ? "Обрані" : "Не обрано";
+            document.getElementById("score3").textContent = score3;
+
+            document.getElementById("selected4").textContent = score4 > 0 ? "Обрані" : "Не обрано";
+            document.getElementById("score4").textContent = score4;
+
+            document.getElementById("selected5").textContent = "";
+            for (let i = 0; i < selected5.length; i++) {
+                if (i > 0) {
+                    document.getElementById("selected5").textContent += ", ";
+                }
+                document.getElementById("selected5").textContent += selected5[i].textContent;
+            }
+            document.getElementById("score5").textContent = score5;
+
+            document.getElementById("selected6").textContent = "";
+            for (let i = 0; i < selected6.length; i++) {
+                if (i > 0) {
+                    document.getElementById("selected6").textContent += ", ";
+                }
+                document.getElementById("selected6").textContent += selected6[i].textContent;
+            }
+            document.getElementById("score6").textContent = score6;
+
+            document.getElementById("selected7").textContent = answer7;
+            document.getElementById("score7").textContent = score7;
+
+            document.getElementById("totalScore").textContent = totalScore;
+        }
+    </script>
+</body>
+</html>

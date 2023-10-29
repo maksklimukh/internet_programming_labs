@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab 5.2</title>
+    <link rel="stylesheet" type="text/css" href="lab5_t2.css">
+</head>
+<body>
+    <div id="content">
+        <ul class="nav">
+            <li>
+                <input type="checkbox" id="chk_1">
+                <button class="nav-btn" for="chk_1">Section 1</button>
+                <ul>
+                    <li><a class="nav-btn" href="#">Subsection 1.1</a></li>
+                    <li><a class="nav-btn" href="#">Subsection 1.2</a></li>
+                    <li><a class="nav-btn" href="#">Subsection 1.3</a></li>
+                    <li><a class="nav-btn" href="#">Subsection 1.4</a></li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" id="chk_2">
+                <button class="nav-btn" for="chk_2">Section 2</button>
+                <ul>
+                    <li><a class="nav-btn" href="#">Subsection 2.1</a></li>
+                    <li>
+                        <input type="checkbox" id="chk_2_2">
+                        <button class="nav-btn" for="chk_2_2">Subsection 2.2</button>
+                        <ul>
+                            <li><a class="nav-btn" href="#">Subsubsection 2.2.1</a></li>
+                            <li><a class="nav-btn" href="#">Subsubsection 2.2.2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="nav-btn" href="#">Section 3</a>
+            </li>
+        </ul>
+
+        <br><a href="lab5.html" id="back">&lt; Back</a>
+    </div>
+    <script>
+        // Отримуємо всі кнопки "Section"
+        const sectionButtons = document.querySelectorAll('.nav-btn');
+
+        // Перебираємо їх та додаємо обробник подій
+        sectionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Знаходимо батьківський елемент li
+                const listItem = button.parentElement;
+
+                // Знаходимо підсекцію ul, яка знаходиться в батьківському li
+                const subsection = listItem.querySelector('ul');
+
+                // Перевіряємо, чи підсекція існує і встановлюємо її видимість
+                if (subsection) {
+                    subsection.style.display = subsection.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

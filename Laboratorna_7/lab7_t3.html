@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Лабораторна робота 7</title>
+    </head>
+
+    <body>
+
+        <!-- Завдання 3.1 -->
+        <h1>Завдання 3.1</h1>
+        <p><strong>Функція, яка перетворює ім'я змінної зі стилю "Snake case" в "Lower camel case" та виводить вхідний і вихідний масиви.toCamelCase()</strong></p>
+
+        <p>Вхідний масив (Snake case): <input type="text" id="inputArray"></p>
+        <button onclick="toCamelCaseAndDisplay()">Перетворити</button>
+
+        <p>Вихідний масив (Lower camel case): <span id="outputArray1"></span></p>
+
+        <!-- Завдання 3.2 -->
+        <h1>Завдання 3.2</h1>
+        <p><strong>Функція, яка перетворює ім'я змінної зі стилю "Lower camel case" в "Snake case" та виводить вхідний і вихідний масиви.</strong></p>
+
+        <p>Вхідний масив (Lower camel case): <input type="text" id="inputArray2"></p>
+        <button onclick="toSnakeCaseAndDisplay()">Перетворити</button>
+
+        <p>Вихідний масив (Snake case): <span id="outputArray2"></span></p>
+
+        <!-- Завдання 3.3 -->
+        <h1>Завдання 3.3</h1>
+        <p><strong>Заміна всіх дат у форматі "yyyy/mm/dd" на формат "dd.mm.yyyy" за допомогою регулярних виразів.</strong></p>
+
+        <p>Введіть текст з датами: <textarea id="textInput" rows="5" cols="40"></textarea></p>
+        <button onclick="replaceDatesAndDisplay()">Замінити</button>
+
+        <p>Результат: <div id="outputText"></div></p>
+
+        <script>
+            // Завдання 3.1
+            function toCamelCase(snakeCase) {
+                const words = snakeCase.split('_');
+                const camelCase = words.map((word, index) => {
+                    if (index === 0) {
+                        return word.toLowerCase();
+                    }
+                    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                }).join('');
+                return camelCase;
+            }
+
+            function toCamelCaseAndDisplay() {
+                const snakeCase = document.getElementById('inputArray').value;
+                const camelCase = toCamelCase(snakeCase);
+                document.getElementById('outputArray1').textContent = camelCase;
+            }
+
+            // Завдання 3.2
+            function toSnakeCase(camelCase) {
+                const snakeCase = camelCase.replace(/([A-Z])/g, '_$1').toLowerCase();
+                if (snakeCase.startsWith('_')) {
+                    return snakeCase.substring(1);
+                }
+                return snakeCase;
+            }
+
+            function toSnakeCaseAndDisplay() {
+                const camelCase = document.getElementById('inputArray2').value;
+                const snakeCase = toSnakeCase(camelCase);
+                document.getElementById('outputArray2').textContent = snakeCase;
+            }
+
+            // Завдання 3.3
+            function replaceDates(inputText) {
+                const regex = /(\d{4})\/(\d{2})\/(\d{2})/gim;
+                return inputText.replace(regex, '$3.$2.$1');
+            }
+
+            function replaceDatesAndDisplay() {
+                const inputText = document.getElementById('textInput').value;
+                const resultText = replaceDates(inputText);
+                document.getElementById('outputText').textContent = resultText;
+            }
+        </script>
+    </body>
+</html>

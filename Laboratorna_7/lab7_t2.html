@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Лабораторна робота 7</title>
+    </head>
+    <body>
+
+        <!-- Завдання 2.1 -->
+        <h1>Завдання 2.1</h1>
+        <p><strong>Функція, яка порівнює довжину двох рядків та повертає 1, -1 або 0.</strong></p>
+
+        <p>Рядок 1: <input type="text" id="string1Input"></p>
+        <p>Рядок 2: <input type="text" id="string2Input"></p>
+        <button onclick="compareAndDisplay()">Порівняти</button>
+
+        <p>Результат: <span id="result5"></span></p>
+
+        <script>
+            function compareStringsLength(str1, str2) {
+                if (str1.length > str2.length) {
+                    return 1;
+                } else if (str1.length < str2.length) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+
+            function compareAndDisplay() {
+                const string1 = document.getElementById('string1Input').value;
+                const string2 = document.getElementById('string2Input').value;
+                const result = compareStringsLength(string1, string2);
+                document.getElementById('result5').textContent = result;
+            }
+        </script>
+
+        <!-- Завдання 2.2 -->
+        <h1>Завдання 2.2</h1>
+        <p><strong>Функція, яка знаходить індекси та кількість входжень символу у рядок.</strong></p>
+
+        <p>Рядок: <input type="text" id="textInput2"></p>
+        <p>Символ: <input type="text" id="charInput"></p>
+        <button onclick="findCharacter()">Знайти</button>
+
+        <p>Індекси: <span id="indexes"></span></p>
+        <p>Кількість входжень: <span id="count"></span></p>
+
+        <script>
+            function findCharacter() {
+                const text = document.getElementById('textInput2').value;
+                const char = document.getElementById('charInput').value;
+                const indexes = [];
+                let count = 0;
+
+                for (let i = 0; i < text.length; i++) {
+                    if (text[i] === char) {
+                        indexes.push(i);
+                        count++;
+                    }
+                }
+
+                document.getElementById('indexes').textContent = indexes.join(', ');
+                document.getElementById('count').textContent = count;
+            }
+        </script>
+
+        <!-- Завдання 2.3 -->
+        <h1>Завдання 2.3</h1>
+        <p><strong>Функція, яка переводить у верхній регістр перший символ рядка.</strong></p>
+
+        <p>Рядок: <input type="text" id="textInput3"></p>
+        <button onclick="capitalizeAndDisplay()">Перевести у верхній регістр</button>
+
+        <p>Результат: <span id="result6"></span></p>
+
+        <script>
+            function capitalizeFirstCharacter(text) {
+                if (text.length > 0) {
+                    const firstCharacter = text.charAt(0).toUpperCase();
+                    return firstCharacter + text.slice(1);
+                } else {
+                    return text;
+                }
+            }
+
+            function capitalizeAndDisplay() {
+                const text = document.getElementById('textInput3').value;
+                const capitalizedText = capitalizeFirstCharacter(text);
+                document.getElementById('result6').textContent = capitalizedText;
+            }
+        </script>
+
+        <!-- Завдання 2.4 -->
+        <h1>Завдання 2.4</h1>
+        <p><strong>Функція, яка підраховує кількість голосних літер у рядку.</strong></p>
+
+        <p>Рядок: <input type="text" id="textInput4"></p>
+        <button onclick="countAndDisplay()">Підрахувати голосні</button>
+
+        <p>Кількість голосних: <span id="count2"></span></p>
+
+        <script>
+            function countVowels(text) {
+                const vowels = 'AEIOUaeiou';
+                let count = 0;
+                for (let i = 0; i < text.length; i++) {
+                    if (vowels.includes(text[i])) {
+                        count++;
+                    }
+                }
+                return count;
+            }
+
+            function countAndDisplay() {
+                const text = document.getElementById('textInput4').value;
+                const vowelCount = countVowels(text);
+                document.getElementById('count2').textContent = vowelCount;
+            }
+        </script>
+
+        <!-- Завдання 2.5 -->
+        <h1>Завдання 2.5</h1>
+        <p><strong>Функція, яка перевіряє наявність спаму у рядку.</strong></p>
+
+        <p>Рядок: <input type="text" id="textInput5"></p>
+        <button onclick="checkAndDisplay()">Перевірити на спам</button>
+
+        <p>Результат: <span id="result7"></span></p>
+
+        <script>
+            function checkForSpam(text) {
+                const spamWords = ["100% безкоштовно", "збільшення продажів", "тільки сьогодні", "не видаляйте"];
+                for (const spamWord of spamWords) {
+                    if (text.toLowerCase().includes(spamWord.toLowerCase())) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function checkAndDisplay() {
+                const text = document.getElementById('textInput5').value;
+                const isSpam = checkForSpam(text);
+                document.getElementById('result7').textContent = isSpam ? "Рядок містить спам" : "Рядок не містить спам";
+            }
+        </script>
+
+        <!-- Завдання 2.6 -->
+        <h1>Завдання 2.6</h1>
+        <p><strong>Функція, яка скорочує рядок та додає три крапки, якщо рядок перевищує максимальну довжину.</strong></p>
+
+        <p>Рядок: <input type="text" id="textInput6"></p>
+        <p>Максимальна довжина: <input type="number" id="maxLengthInput2"></p>
+        <button onclick="truncateAndDisplay()">Скоротити</button>
+
+        <p>Результат: <span id="result8"></span></p>
+
+        <script>
+            function truncateString(text, maxLength) {
+                if (text.length > maxLength) {
+                    let truncatedText = text.slice(0, maxLength - 3);
+                    if (truncatedText.endsWith("...")) {
+                        return truncatedText;
+                    } else {
+                        return truncatedText + '...';
+                    }
+                } else {
+                    return text;
+                }
+            }
+
+            function truncateAndDisplay() {
+                const text = document.getElementById('textInput6').value;
+                const maxLength = parseInt(document.getElementById('maxLengthInput2').value);
+                const truncatedText = truncateString(text, maxLength);
+                document.getElementById('result8').textContent = truncatedText;
+            }
+        </script>
+
+    </body>
+</html>

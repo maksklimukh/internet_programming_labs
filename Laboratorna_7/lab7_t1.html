@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Лабораторна робота 7</title>
+    </head>
+    <body>
+
+        <!-- Завдання 1.1 -->
+        <h1>Завдання 1.1</h1>
+        <p><strong>Функція, що обертає введене число та виводить результат за допомогою .split()</strong></p>
+
+        <p>Введіть число: <input type="number" id="numberInput"></p>
+        <button onclick="reverseAndDisplay()">Обернути та вивести</button>
+
+        <p>Результат: <span id="result1"></span></p>
+
+        <!-- Обернення числа та видалення нулів-->
+        <script>
+            function reverseNumber(inputNumber) {
+                const reversedNumber = parseInt(inputNumber.toString().split('').reverse().join(''));
+                return reversedNumber;
+            }
+
+            function reverseAndDisplay() {
+                const inputNumber = document.getElementById('numberInput').value;
+                const reversedNumber = reverseNumber(inputNumber);
+                const formattedReversedNumber = reversedNumber.toString().padStart(inputNumber.length, '0');
+                document.getElementById('result1').textContent = formattedReversedNumber;
+            }
+        </script>
+
+        <!-- Завдання 1.2 -->
+        <h1>Завдання 1.2</h1>
+        <p><strong>Функція, що видаляє нульові значення з масиву чисел за допомогою .replace()</strong></p>
+
+        <p>Введіть числа через кому (приклад: 1, 0, 2, 0, 3): <input type="text" id="arrayInput"></p>
+        <button onclick="removeZerosAndDisplay()">Видалити нулі</button>
+
+        <p>Результат: <span id="result2"></span></p>
+
+        <script>
+            function removeZeros(inputString) {
+                return inputString.replace(/(^|,)(\s*0\s*)/g, ',');
+            }
+
+            function removeZerosAndDisplay() {
+                const inputString = document.getElementById('arrayInput').value;
+                const modifiedString = removeZeros(inputString);
+                document.getElementById('result2').textContent = modifiedString;
+            }
+        </script>
+
+        <!-- Завдання 1.3 -->
+        <h1>Завдання 1.3</h1>
+        <p><strong>Функція, що відображає введений текстовий рядок у протилежному порядку .reverser()</strong></p>
+
+        <p>Введіть текст: <input type="text" id="textInput"></p>
+        <button onclick="reverseTextAndDisplay()">Обернути текст</button>
+
+        <p>Результат: <span id="result3"></span></p>
+
+        <script>
+            function reverser(inputText) {
+                return inputText.split('').reverse().join('');
+            }
+
+            function reverseTextAndDisplay() {
+                const inputText = document.getElementById('textInput').value;
+                const reversedText = reverser(inputText);
+                document.getElementById('result3').textContent = reversedText;
+            }
+        </script>
+
+        <!-- Завдання 1.4 -->
+        <h1>Завдання 1.4</h1>
+        <p><strong>Функція, яка виконує дві операції на введеному текстовому рядку:</strong></p>
+
+        <p>1. Поміняти місцями друге і третє слово.<br>
+        2. Замінити пропуски на коми.</p>
+
+        <p>Введіть текст: <input type="text" id="textInput2"></p>
+        <button onclick="performReplacements()">Виконати заміни</button>
+
+        <p>Результат: <span id="result4"></span></p>
+
+        <script>
+            function replace(inputText) {
+                const words = inputText.split(' ');
+
+                if (words.length >= 3) {
+                    const temp = words[1];
+                    words[1] = words[2];
+                    words[2] = temp;
+                }
+
+                const replacedText = words.join(', ');
+
+                return replacedText;
+            }
+
+            function performReplacements() {
+                const inputText = document.getElementById('textInput2').value;
+                const replacedText = replace(inputText);
+                document.getElementById('result4').textContent = replacedText;
+            }
+        </script>
+    </body>
+</html>

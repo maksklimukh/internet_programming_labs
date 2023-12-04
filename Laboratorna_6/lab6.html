@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Форма реєстрації</title>
+  <link rel="stylesheet" href="lab6.css">
+</head>
+<body>
+
+<header>
+  <h1>Форма реєстрації</h1>
+</header>
+
+<main>
+  <form id="registrationForm">
+    <label for="email">Адреса електронної пошти (e-mail):</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="name">Ім'я та прізвище:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="login">Логін:</label>
+    <input type="text" id="login" name="login" required>
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="postcode">Поштовий індекс:</label>
+    <input type="text" id="postcode" name="postcode" required>
+  </form>
+
+  <div id="buttonContainer">
+    <input type="button" value="Перевірити дані" onclick="checkData()">
+  </div>
+
+  <div id="result"></div>
+  <div id="successIcon" style="display: none;">
+    <img src="success.png" alt="Усі дані введено коректно" width="128" height="128">
+  </div>
+</main>
+
+<script>
+document.getElementById("checkDataButton").addEventListener("click", checkData);
+
+function checkData() {
+  const fields = {
+    email: document.getElementById("email"),
+    name: document.getElementById("name"),
+    login: document.getElementById("login"),
+    password: document.getElementById("password"),
+    postcode: document.getElementById("postcode"),
+  };
+
+  const patterns = {
+    email: /^[a-zA-Z0-9._-]+@pnu.edu.ua$/,
+    name: /^([A-Za-zА-ЯЁа-яёҐЄІЇґєії][a-zA-ZА-ЯЁа-яёҐЄІЇґєії]*)\s([A-ZА-ЯЁҐЄІЇ][a-zA-ZА-ЯЁҐЄІЇґєії]*)$/,
+    login: /^[a-zA-Z]+$/,
+    password: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[-!@#$%^&*]).{8,}$/,
+    postcode: /^\d{5}$/,
+  };
+
+  const result = document.getElementById("result");
+  let valid = true;
+
+  for (const field in fields) {
+    if (!patterns[field].test(fields[field].value)) {
+      valid = false;
+      fields[field].style.border = "2px double #ff5555";
+    } else {
+      fields[field].style.border = "2px solid #26c325";
+    }
+  }
+
+  if (valid) {
+    result.className = "success";
+    result.innerHTML = "Всі дані введено коректно!";
+    document.getElementById("successIcon").style.display = "block";
+  } else {
+    result.className = "error";
+    result.innerHTML = "Будь ласка, введіть коректні дані в поля.";
+    document.getElementById("successIcon").style.display = "none";
+  }
+}
+</script>
+</body>
+</html>

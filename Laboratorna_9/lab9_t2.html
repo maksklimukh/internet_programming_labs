@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #logo {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background-color: #af2727;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #logoIn {
+            position: inherit;
+            width: 20px;
+            height: 20px;
+            background-color: #14d23f;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        #text {
+            position: relative;
+            top: 50%;
+            left: 85%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-style: italic;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 30px;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="logo">
+        <div id="logoIn">
+            <div id="text"></div>
+        </div>
+    </div>
+
+    <script>
+        function animate({ duration, draw, timing, onComplete }) {
+            let start = performance.now();
+            requestAnimationFrame(function animate(time) {
+                let timeFraction = (time - start) / duration;
+                if (timeFraction > 1) timeFraction = 1;
+                let progress = timing(timeFraction)
+                draw(progress);
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animate);
+                } else if (onComplete) {
+                    onComplete();
+                }
+            });
+        }
+
+        function bounce(timeFraction) {
+            for (let a = 0, b = 1; 1; a += b, b /= 2) {
+                if (timeFraction >= (7 - 4 * a) / 11) {
+                    return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+                }
+            }
+        }
+
+        function makeEaseOut(timing) {
+            return function (timeFraction) {
+                return 1 - timing(1 - timeFraction);
+            }
+        }
+
+        let bounceEaseOut = makeEaseOut(bounce);
+        //друкування тексту
+        var typeText = document.getElementById("text")
+        var textToBeTyped = "ІПЗ-22"
+        var index = 0, isAdding = true
+        function animateText() {
+            setTimeout(function () {
+                typeText.innerText = textToBeTyped.slice(0, index)
+                if (isAdding) {
+                    if (index > textToBeTyped.length) {
+                        isAdding = false
+                        return
+                    } else {
+                        index++
+                    }
+                }
+                animateText()
+            }, 100)
+        }
+        ///
+        let textColor = document.getElementById("text");
+        let frameColor = document.getElementById("logo");
+        let hue = 0;
+        function startColorAnimation() {
+            setInterval(() => {
+                hue = (hue + 1) % 360;
+                const color = `hsl(${hue}, 100%, 50%)`;
+                textColor.style.color = color;
+                frameColor.style.background = color;
+            }, 50);
+        }
+
+        logo.onclick = function () {
+            animate({
+                duration: 3000,
+                timing: bounceEaseOut,
+                draw: function (progress) {
+                    logoIn.style.height = progress * 150 + 'px';
+                    logoIn.style.width = progress * 150 + 'px';
+                    logoIn.style.left = progress * 25 + 'px';
+                    logoIn.style.top = progress * 25 + 'px';
+                    logo.style.height = progress * 200 + 'px';
+                    logo.style.width = progress * 200 + 'px';
+                    logo.style.left = progress * 550 + 'px';
+                    logo.style.top = progress * 350 + 'px';
+                },
+                onComplete: function () {
+                    animateText();
+                    startColorAnimation();
+                },
+            });
+        }
+    </script>
+
+</body>
+
+</html>

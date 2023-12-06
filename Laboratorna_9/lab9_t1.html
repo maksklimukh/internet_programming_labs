@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        #aF2{
+            position: relative;
+            cursor: pointer;
+            width: 200px;
+        }
+
+
+        progress{
+            width: 15%
+        }
+
+        .brick {
+            width: 40px;
+            height: 20px;
+            border-radius: 30%;
+            background: #000000;
+            position: relative;
+            cursor: pointer;
+        }
+        .path {
+            margin-top: 30px;
+            outline: 1px solid #ff9900;
+            width: 540px;
+            height: 20px;
+            border-radius: 10%;
+        }
+
+
+    </style>
+</head>
+<body>
+<div>
+    <h3>Використання setInterval</h3>
+    <p id="aF2">Type here</p>
+</div>
+<div>
+    <h3>Структурована анімація +  requestAnimationFrame</h3>
+    <progress id="e"></progress>
+</div>
+<div id="4">
+    <h3>timing functions</h3>
+</div>
+<div>
+    <h3>Реверс: ease*</h3>
+    <div class="path">
+        <div id="brickO" class="brick"></div>
+    </div>
+    <div class="path">
+        <div id="brickIO" class="brick"></div>
+    </div>
+</div>
+<div>
+    <h3>Draw</h3>
+    <textarea id="textExample" rows="5" cols="60">Інженерія програмного забезпечення</textarea>
+
+    <button onclick="animateText(textExample)">Run</button>
+</div>
+
+
+<script>
+    task4 = document.getElementById("4");
+    for (let i = 1 ; i<6; i++){
+        task4.innerHTML+= `  <div class="path"><div class="brick" id="brick${i}"></div></div>`
+    }
+
+    function animate({duration, draw, timing}) {
+
+        let start = performance.now();
+
+        requestAnimationFrame(function animate(time) {
+            let timeFraction = (time - start) / duration;
+            if (timeFraction > 1) timeFraction = 1;
+
+            let progress = timing(timeFraction)
+
+            draw(progress);
+
+            if (timeFraction < 1) {
+                requestAnimationFrame(animate);
+            }
+
+        });
+    }
+
+
+    aF2.onclick = function() {
+        let start = Date.now();
+        let timer = setInterval(function() {
+            let timePassed = Date.now() - start;
+            aF2.style.left = timePassed / 3 + 'px';
+            if (timePassed > 2000) clearInterval(timer);
+        }, 20);
+    }
+
+
+
+
+
+    e.onclick = function(){
+        animate({
+            duration: 1000,
+            timing: function(timeFraction) {
+                return timeFraction;
+            },
+            draw: function(progress) {
+                e.style.width = progress * 100 + '%';
+            }
+        });
+    }
+    brick1.onclick = function() {
+        animate({
+            duration: 1000,
+            timing: function(timeFraction) {
+                return Math.pow(timeFraction, 2);
+            },
+            draw: function(progress) {
+                brick1.style.left = progress * 500 + 'px';
+            }
+        });
+    };
+    brick2.onclick = function() {
+        animate({
+            duration: 1000,
+            timing: function(timeFraction) {
+                return 1 - Math.sin(Math.acos(timeFraction));
+            },
+            draw: function(progress) {
+                brick2.style.left = progress * 500 + 'px';
+            }
+        });
+    };
+    let x = 1.5;
+    brick3.onclick = function() {
+        animate({
+            duration: 1000,
+            timing: function back(x, timeFraction) {
+                return Math.pow(timeFraction, 2) * ((x + 1) * timeFraction - x)
+            }.bind(null, 1.5),
+            draw: function(progress) {
+                brick3.style.left = progress * 500 + 'px';
+            }
+        });
+    };
+    brick4.onclick = function() {
+        animate({
+            duration: 3000,
+            timing: function(timeFraction) {
+                for (let a = 0, b = 1; 1; a += b, b /= 2) {
+                    if (timeFraction >= (7 - 4 * a) / 11) {
+                        return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+                    }
+                }
+            },
+            draw: function(progress) {
+                brick4.style.left = progress * 500 + 'px';
+            }
+        });
+    };
+    brick5.onclick = function() {
+        animate({
+            duration: 3000,
+            timing: function elastic(x, timeFraction) {
+                return Math.pow(2, 10 * (timeFraction - 1)) * Math.cos(20 * Math.PI * x / 3 * timeFraction)
+            }.bind(null, 1.5),
+            draw: function(progress) {
+                brick5.style.left = progress * 500 + 'px';
+            }
+        });
+    };
+
+
+    function makeEaseOut(timing) {
+        return function(timeFraction) {
+            return 1 - timing(1 - timeFraction);
+        }
+    }
+    function makeEaseInOut(timing) {
+        return function(timeFraction) {
+            if (timeFraction < .5)
+                return timing(2 * timeFraction) / 2;
+            else
+                return (2 - timing(2 * (1 - timeFraction))) / 2;
+        }
+    }
+
+    function bounce(timeFraction) {
+        for (let a = 0, b = 1; 1; a += b, b /= 2) {
+            if (timeFraction >= (7 - 4 * a) / 11) {
+                return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+            }
+        }
+    }
+
+    let bounceEaseOut = makeEaseOut(bounce);
+    let bounceEaseInOut = makeEaseInOut(bounce);
+
+    brickO.onclick = function() {
+        animate({
+            duration: 3000,
+            timing: bounceEaseOut,
+            draw: function(progress) {
+                brickO.style.left = progress * 500 + 'px';
+            }
+        });
+    };
+
+
+    brickIO.onclick = function() {
+        animate({
+            duration: 3000,
+            timing: bounceEaseInOut,
+            draw: function(progress) {
+                brickIO.style.left = progress * 500 + 'px';
+            }
+        });
+    };
+
+
+
+    function animateText(textArea) {
+        let text = textArea.value;
+        let to = text.length,
+            from = 0;
+
+        animate({
+            duration: 5000,
+            timing: bounce,
+            draw: function(progress) {
+                let result = (to - from) * progress + from;
+                textArea.value = text.slice(0, Math.ceil(result))
+            }
+        });
+    }
+</script>
+<br><a href="lab9.html">return back</a>
+</body>
+</html>

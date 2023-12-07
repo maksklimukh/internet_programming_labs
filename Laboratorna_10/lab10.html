@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <style>
+            .highlight {
+                background-color: yellow;
+            }
+
+            .border-fill {
+                border: 2px solid black;
+                background-color: rgb(26, 123, 44);
+            }
+
+            #image-container {
+                border: 2px solid rgb(157, 155, 155);
+                background-color: white; /* Змінив колір тла для блоку з зображенням */
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Контент сторінки</h1>
+        <a href="#" class="button">Натисніть, щоб показати текст</a>
+        <p></p>
+        <div id="hide_text">Демонстраційний прихований текст</div>
+        <p></p>
+        <div></div>
+        <p></p>
+        <button id="show-image">Показати зображення</button>
+        <div id="image-container" style="display: none;">
+            <img src="../images/image1.jpg" width="400">
+        </div>
+        <button id="form-button">Перевірити слово</button>
+        <input type="text" id="text-input">
+        <p id="form-feedback"></p>
+        <button id="single-click-button">Одинарний клік</button>
+        <button id="double-click-button">Подвійний клік</button>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var $text = $('#hide_text');
+                $text.hide();
+
+                $('.button').click(function () {
+                    $text.show(200);
+                });
+
+                $("p:first").text("DOM first").css("color", "green");
+                $("p:last").text("DOM last").css("color", "green");
+
+                $('div').bind('mouseover', function () {
+                    $(this).addClass('highlight');
+                });
+
+                $('div').bind('mouseout', function () {
+                    $(this).removeClass('highlight');
+                });
+
+                $('div').bind('click', function () {
+                    if ($(this).hasClass('border-fill')) {
+                        $(this).removeClass('border-fill');
+                    } else {
+                        $(this).addClass('border-fill');
+                    }
+                });
+
+                var imageTooltipShown = false;
+
+                $('#show-image').bind('click', function () {
+                    $('#image-container').show();
+                    imageTooltipShown = false;
+                });
+
+                $('#image-container').bind('click', function () {
+                    $(this).hide();
+                    alert("Це зображення!");
+                });
+
+                $('#image-container').bind('mouseover', function () {
+                    if (!imageTooltipShown) {
+                        alert("Це кубик Рубіка!");
+                        imageTooltipShown = true;
+                    }
+                });
+
+                $('#form-button').bind('click', function () {
+                    var inputText = $('#text-input').val();
+                    if (inputText === "correct") {
+                        alert("Успішно!");
+                        $('#form-feedback').text('');
+                    } else {
+                        $('#form-feedback').text("Неправильно!");
+                    }
+                });
+
+                $('#single-click-button').bind('click', function () {
+                    alert("Одинарний клік");
+                });
+
+                $('#double-click-button').bind('dblclick', function () {
+                    alert("Подвійний клік");
+                });
+            });
+        </script>
+    </body>
+</html>

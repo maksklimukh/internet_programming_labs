@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання 2 - Використання різних методів</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="box" style="width: 200px; height: 200px; background-color: rgb(255, 145, 0); display: none;"></div>
+    <button id="fadeInButton">Fade In</button>
+    <button id="fadeOutButton">Fade Out</button>
+    <button id="fadeToButton">Fade To</button>
+    <button id="slideToggleButton">Slide Toggle</button>
+    <button id="stopButton">Stop</button>
+    <button id="toggleButton">Toggle</button>
+
+    <script>
+        $(document).ready(function() {
+            // Метод .fadeIn()
+            $("#fadeInButton").click(function() {
+                $("#box").fadeIn(1000); // Застосовує анімацію з появленням
+            });
+
+            // Метод .fadeOut()
+            $("#fadeOutButton").click(function() {
+                $("#box").fadeOut(1000); // Застосовує анімацію з зникненням
+            });
+
+            // Метод .fadeTo()
+            $("#fadeToButton").click(function() {
+                $("#box").fadeTo(1000, 0.5); // Застосовує анімацію для зміни прозорості
+            });
+
+            // Метод .slideToggle()
+            $("#slideToggleButton").click(function() {
+                $("#box").slideToggle(1000); // Застосовує анімацію для відмикання або закриття
+            });
+
+            // Метод .stop()
+            $("#stopButton").click(function() {
+                $("#box").stop(); // Зупиняє поточну анімацію
+            });
+
+            // Метод .toggle()
+            $("#toggleButton").click(function() {
+                $("#box").toggle(1000); // Застосовує анімацію з відмиканням або закриттям
+            });
+        });
+    </script>
+      <p><a href="lab12.html"><- Повернутися назад</a></p>
+</body>
+</html>

@@ -103,3 +103,8 @@ ul.tabs {
 .tab-content ul li:last-child {
     border-bottom: none;
 }
+
+.tabs li a.active img {
+    transform: scale(1.5); /* Enlarge the image */
+    transition: transform 0.3s ease; /* Smooth transition */
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання 1</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="myDiv">Початковий текст</div>
+    <br>
+
+    <input type="text" id="myInput" value="Початкове значення">
+    <br>
+
+    <a href="https://www.example.com" id="myLink">Посилання</a>
+
+    <script>
+        $(document).ready(function() {
+            $("#myDiv").html("Новий текст");
+            
+            var content = $("#myDiv").html();
+            alert(content);
+
+            $("#myDiv").css("color", "red");
+            
+            var color = $("#myDiv").css("color");
+            alert("Колір тексту: " + color);
+
+            $("#myInput").val("Нове значення");
+            
+            var value = $("#myInput").val();
+            alert("Значення введення: " + value);
+
+            $("#myLink").attr("href", "https://www.newlink.com");
+            
+            var link = $("#myLink").attr("href");
+            alert("Посилання: " + link);
+
+            $("#myLink").removeAttr("href");
+        });
+    </script>
+    <p><a href="lab11.html"><- Повернутися назад</a></p>
+</body>
+</html>

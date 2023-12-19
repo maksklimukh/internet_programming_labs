@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання 5 </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <script>
+        $(document).ready(function() {
+            // Використання методу $.contains()
+            var parentElement = document.getElementById('parentElement');
+            var childElement = document.getElementById('childElement');
+            console.log("$.contains(parentElement, childElement): " + $.contains(parentElement, childElement));
+
+            // Використання методу $.extend()
+            var object1 = { a: 1, b: 2 };
+            var object2 = { c: 3, d: 4 };
+            var mergedObject = $.extend({}, object1, object2);
+            console.log("$.extend({}, { a: 1, b: 2 }, { c: 3, d: 4 }):");
+            console.log(mergedObject);
+        });
+    </script>
+
+    <div id="parentElement">
+        <div id="childElement">Це дочірній елемент</div>
+    </div>
+    <p><a href="lab11.html"><- Повернутися назад</a></p>
+</body>
+</html>

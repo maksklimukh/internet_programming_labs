@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання 4 - Використання методу .filter()</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="applyStylesForClass">Застосувати стилі для класу</button>
+    <button id="applyStylesForThirdLi">Застосувати стилі для кожного третього елементу <li></button>
+    <ul>
+        <li>Елемент 1</li>
+        <li>Елемент 2</li>
+        <li>Елемент 3</li>
+        <li>Елемент 4</li>
+        <li>Елемент 5</li>
+    </ul>
+    <div class="modify">Елемент 1 з класом "modify"</div>
+    <div class="modify">Елемент 2 з класом "modify"</div>
+    <div class="modify">Елемент 3 з класом "modify"</div>
+    <div class="modify">Елемент 4 з класом "modify"</div>
+    <div class="modify">Елемент 5 з класом "modify"</div>
+
+    <script>
+        $(document).ready(function() {
+            $("#applyStylesForClass").click(function() {
+                // Застосувати стилі для всіх елементів з класом "modify" за допомогою .filter()
+                $(".modify").filter(function() {
+                    return true;
+                }).css({
+                    backgroundColor: "yellow",
+                    color: "blue",
+                    fontWeight: "bold",
+                });
+                $(".modify").text("modify");
+            });
+
+        
+            $("#applyStylesForThirdLi").click(function() {
+                // Застосувати стилі та текст для кожного третього елементу <li>
+                $("li:nth-child(3n)").css({
+                    backgroundColor: "green",
+                    color: "white",
+                    fontWeight: "bold",
+                });
+                $("li:nth-child(3n)").text("modify");
+            });
+        });
+    
+    </script>
+    <p><a href="lab11.html"><- Повернутися назад</a></p>
+</body>
+</html>

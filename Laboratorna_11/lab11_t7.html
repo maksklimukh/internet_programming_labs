@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання 7</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="box" style="width: 200px; height: 200px; background-color: rgb(174, 255, 0);"></div>
+    <button id="fadeInButton">Fade In</button>
+    <button id="fadeOutButton">Fade Out</button>
+    <button id="slideToggleButton">Slide Toggle</button>
+
+    <script>
+        $(document).ready(function() {
+            // Метод .fadeIn()
+            $("#fadeInButton").click(function() {
+                $("#box").fadeIn(1000); // Застосовує анімацію з зникненням
+            });
+
+            // Метод .fadeOut()
+            $("#fadeOutButton").click(function() {
+                $("#box").fadeOut(1000); // Застосовує анімацію з зникненням
+            });
+
+            // Метод .slideToggle()
+            var isVisible = true;
+            $("#slideToggleButton").click(function() {
+                $("#box").slideToggle(1000); // Застосовує анімацію з відмиканням або закриттям
+                isVisible = !isVisible;
+                if (isVisible) {
+                    $(this).text("Slide Up");
+                } else {
+                    $(this).text("Slide Down");
+                }
+            });
+        });
+    </script>
+    <p><a href="lab11.html"><- Повернутися назад</a></p>
+</body>
+</html>

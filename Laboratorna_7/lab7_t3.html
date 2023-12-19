@@ -35,6 +35,19 @@
 
         <p>Результат: <div id="outputText"></div></p>
 
+        <!-- захист -->
+        <h1>захист</h1>
+
+        <!-- Завдання 3.4 -->
+        <h1>Завдання 3.4</h1>
+        <p><strong>Функція, яка робить передостанню літеру великою у кожному слові масиву.</strong></p>
+
+        <p>Вхідний масив слів: <input type="text" id="inputArray3"></p>
+        <button onclick="transformAndDisplay()">Перетворити</button>
+
+        <p>Вихідний масив: <span id="outputArray3"></span></p>
+
+
         <script>
             // Завдання 3.1
             function toCamelCase(snakeCase) {
@@ -80,6 +93,20 @@
                 const resultText = replaceDates(inputText);
                 document.getElementById('outputText').textContent = resultText;
             }
+
+            // захист
+            function capitalizeSequentialDoubles(wordsArray) {
+                return wordsArray.map(word => {
+                    return word.replace(/(.)\1/, (match, char) => char + char.toUpperCase());
+                });
+            }
+            
+            function transformAndDisplay() {
+                const inputWords = document.getElementById('inputArray3').value.split(', ');
+                const transformedWords = capitalizeSequentialDoubles(inputWords);
+                document.getElementById('outputArray3').textContent = transformedWords.join(', ');
+            }
+
         </script>
     </body>
 </html>

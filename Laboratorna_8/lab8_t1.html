@@ -7,15 +7,9 @@
     <h1>Часовий об'єкт</h1>
     <p>Поточний час:</p>
     <p id="currentTime"></p>
-    <p>Змінити час:</p>
-    <input type="number" id="secondsInput" placeholder="Секунди">
-    <button onclick="changeTime('seconds')">Змінити секунди</button>
-    <br>
-    <input type="number" id="minutesInput" placeholder="Хвилини">
-    <button onclick="changeTime('minutes')">Змінити хвилини</button>
-    <br>
-    <input type="number" id="hoursInput" placeholder="Години">
-    <button onclick="changeTime('hours')">Змінити години</button>
+    <p>Змінити час (гг:хх:сс):</p>
+    <input type="text" id="timeInput" placeholder="гг:хх:сс">
+    <button onclick="changeTime()">Змінити</button>
 
     <script>
         const currentTimeDisplay = document.getElementById("currentTime");
@@ -28,16 +22,13 @@
             currentTimeDisplay.innerText = `${hours}:${minutes}:${seconds}`;
         }
 
-        function changeTime(unit) {
-            const value = parseInt(document.getElementById(`${unit}Input`).value) || 0;
-            
-            if (unit === "seconds") {
-                currentTime.setSeconds(currentTime.getSeconds() + value);
-            } else if (unit === "minutes") {
-                currentTime.setMinutes(currentTime.getMinutes() + value);
-            } else if (unit === "hours") {
-                currentTime.setHours(currentTime.getHours() + value);
-            }
+        function changeTime() {
+            const timeValue = document.getElementById("timeInput").value;
+            const [hours, minutes, seconds] = timeValue.split(':').map(num => parseInt(num, 10) || 0);
+
+            currentTime.setHours(currentTime.getHours() + hours);
+            currentTime.setMinutes(currentTime.getMinutes() + minutes);
+            currentTime.setSeconds(currentTime.getSeconds() + seconds);
 
             displayTime();
         }

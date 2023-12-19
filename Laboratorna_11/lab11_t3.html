@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання 3</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="addButton">.add()</button>
+    <button id="hasButton">.has()</button>
+    <button id="parentsButton">.parents()</button>
+    <button id="closestButton">.closest()</button>
+    <button id="mapButton">.map()</button>
+
+    <div id="container">
+        <div class="parent">
+            <div class="child">Child 1</div>
+            <div class="child">Child 2</div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#addButton").click(function() {
+                var addedElement = $("<p>Доданий елемент</p>");
+                $("#container").add(addedElement).appendTo("#container");
+            });
+
+            $("#hasButton").click(function() {
+                var hasChildren = $(".parent").has(".child");
+                alert("Чи є у .parent діти? " + hasChildren.length);
+            });
+
+            $("#parentsButton").click(function() {
+                var parents = $(".child").parents(".parent");
+                alert("Батьківські елементи .child: " + parents.length);
+            });
+
+            $("#closestButton").click(function() {
+                var closestParent = $(".child").closest(".parent");
+                alert("Найближчий батьківський елемент .parent: " + closestParent.length);
+            });
+
+            $("#mapButton").click(function() {
+                var textArray = $(".child").map(function() {
+                    return $(this).text();
+                }).get();
+                alert("Тексти дітей: " + textArray.join(", "));
+            });
+        });
+    </script>
+    <p><a href="lab11.html"><- Повернутися назад</a></p>
+</body>
+</html>

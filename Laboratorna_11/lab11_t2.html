@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання 2</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="originalDiv">Початковий текст </div>
+    <div id="cloneDiv"> </div>
+    <div id="widthDiv">Ширина: 100 пікселів</div>
+    <div id="outerWidthDiv" style="width: 200px; padding: 10px; border: 1px solid black;">Зовнішня ширина</div>
+
+    <script>
+        $(document).ready(function() {
+            
+            $("#originalDiv").append(" Додатковий текст");
+
+            var original = $("#originalDiv");
+            var cloned = original.clone();
+            $("#cloneDiv").append(cloned);
+
+            $("#widthDiv").width(function(index, currentWidth) {
+                return currentWidth + 100;
+            });
+
+            var outerWidth = $("#outerWidthDiv").outerWidth();
+            alert("Зовнішня ширина div: " + outerWidth + " пікселів");
+        });
+    </script>
+    <p><a href="lab11.html"><- Повернутися назад</a></p>
+</body>
+</html>

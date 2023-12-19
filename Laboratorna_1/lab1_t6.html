@@ -8,6 +8,7 @@
         var continents = ["Африка", "Америка", "Азія", "Європа", "Океанія"];
         var populationDensity = [38, 22, 150, 73, 5]; // Густина населення на км²
         var area = [30.37, 42.55, 44.58, 10.18, 8.53]; // Площа в тисячах км²
+        var population_growth = [2, 5, 4, 3, 6];
 
         // Функція для виведення густини населення та площі континенту
         function fun1() {
@@ -36,10 +37,44 @@
             if (index !== -1) {
                 var population = populationDensity[index] * area[index];
                 resultPopulation.innerHTML = "Населення: " + population + " осіб";
+                return population
             } else {
                 resultPopulation.innerHTML = "Континент не знайдено.";
             }
         }
+
+        function fun3() {
+            var selectedContinent = document.getElementById("continent").value;
+            var userMultiplierInput = document.getElementById("multiplier").value;
+
+            if (isNaN(userMultiplierInput)) {
+                alert("Введено некоректний приріст. Будь ласка, введіть число.");
+                return;
+            }
+
+            var index = continents.indexOf(selectedContinent);
+
+            if (index === -1) {
+                alert("Континент не знайдено.");
+                return;
+            }
+
+            var density = populationDensity[index];
+            var continentArea = area[index];
+            var userMultiplier = parseFloat(userMultiplierInput);
+
+            if (isNaN(userMultiplier)) {
+                alert("Введено некоректний приріст. Будь ласка, введіть число.");
+                return;
+            }
+
+            var population = density * continentArea * userMultiplier;
+
+            var result = "Населення з урахуванням приросту: " + population.toFixed(2) + " осіб";
+
+            alert(result);
+        }
+
     </script>
     <title>Лабораторна 1 Завдання 6</title>
 </head>
@@ -48,8 +83,12 @@
     <label for="continent">Введіть назву континенту (Африка, Америка, Азія, Європа, Океанія): </label>
     <input type="text" id="continent"><br><br>
 
+    <label for="population_growth">Введіть приріст: </label>
+    <input type="text" id="multiplier"><br><br>
+
     <button onclick="fun1()">Густина і площа</button>
-    <button onclick="fun2()">Населення</button><br><br>
+    <button onclick="fun2()">Населення</button>
+    <button onclick="fun3()">Приріст</button><br><br>
 
     <div id="resultDensity"></div>
     <div id="resultArea"></div>
